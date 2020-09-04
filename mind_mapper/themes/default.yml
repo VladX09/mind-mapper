@@ -3,5 +3,5 @@ root:
     type: "eval"
     target: "NODE.depth == 0"
   attrs:
-    style: fill
+    style: filled
     color: red

@@ -14,7 +14,7 @@ def render_map(map_raw: t.List[t.Dict[str, t.Any]], styles_raw: t.Dict[str, t.Di
     for node in mind_map.nodes.values():
         node.finalize_attrs()
 
-    graph = pydot.Dot(overlap=False, pad=0.5)
+    graph = pydot.Dot(overlap=False, sep="+20,40", graph_type="digraph", pad=0.5)
 
     for node in mind_map.nodes.values():
         graph.add_node(node)

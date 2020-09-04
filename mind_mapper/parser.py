@@ -2,6 +2,7 @@ import typing as t
 
 import schema as sc
 
+from . import schemas
 from .models import MindMap, Node
 
 
@@ -70,14 +71,10 @@ def make_dict(record: t.Union[str, t.Dict]) -> t.Dict[str, t.Any]:
 
 
 def validate_record(record: t.Dict[str, t.Any], parent_node: t.Optional[Node], mind_map: MindMap):
-    RecordSchema = sc.Schema({
-        str: sc.Or(None, list),
-        sc.Optional("attrs", default={}): sc.Schema({str: sc.Or(str, int, float, bool)})
-    })
     meta_keys = {"attrs"}
 
     try:
-        record = RecordSchema.validate(record)
+        record = schemas.RecordSchema.validate(record)
     except sc.SchemaError as e:
         raise ParsingError(e)
 

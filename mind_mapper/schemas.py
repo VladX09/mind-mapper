@@ -22,5 +22,5 @@ PredicateSchema = sc.Or(EvalPredicateSchema, RegexPredicateSchema, NamePredicate
 StyleSchema = sc.Schema({
     "predicate": PredicateSchema,
     "attrs": AttrsSchema,
-    "priority": int,
+    sc.Optional("order", default=0): int,
 })

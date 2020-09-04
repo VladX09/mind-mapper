@@ -34,31 +34,36 @@ class Parser:
         self._call_stack.append((root_record, None))
 
     def parse_map(self, map_raw: t.List[t.Dict[str, t.Any]]) -> MindMap:
-        self.prepare_call_stack(map_raw)
-        mind_map = MindMap(nodes={}, edges=[], root=None)
+        try:
+            map_raw = schemas.MapSchema.validate(map_raw)
+            self.prepare_call_stack(map_raw)
+            mind_map = MindMap(nodes={}, edges=[], root=None)
 
-        while len(self._call_stack) > 0:
-            record, parent_node = self._call_stack.pop()
-            record = make_dict(record)
+            while len(self._call_stack) > 0:
+                record, parent_node = self._call_stack.pop()
+                record = make_dict(record)
 
-            validate_record(record, parent_node, mind_map)
+                validate_record(record, parent_node, mind_map)
 
-            node_attrs = record.pop("attrs", {})
-            node_name = list(record.keys())[0]
-            node = mind_map.nodes.get(node_name)
-            if node is not None:
-                node.attrs.update(node_attrs)
-            else:
-                node = Node(node_name, parent_node, **node_attrs)
+                node_attrs = record.pop("attrs", {})
+                node_name = list(record.keys())[0]
+                node = mind_map.nodes.get(node_name)
+                if node is not None:
+                    node.attrs.update(node_attrs)
+                else:
+                    node = Node(node_name, parent_node, **node_attrs)
 
-            node_children = list(record.values())[0] or []
-            for child_record in node_children:
-                self._call_stack.append((child_record, node))
+                node_children = list(record.values())[0] or []
+                for child_record in node_children:
+                    self._call_stack.append((child_record, node))
 
-            mind_map.nodes[node_name] = node
-            if parent_node:
-                mind_map.edges.append((parent_node, node))
-                parent_node.children.append(node)
+                mind_map.nodes[node_name] = node
+                if parent_node:
+                    mind_map.edges.append((parent_node, node))
+                    parent_node.children.append(node)
+
+        except sc.SchemaError as e:
+            raise ParsingError(e)
 
         return mind_map
 
@@ -72,11 +77,7 @@ def make_dict(record: t.Union[str, t.Dict]) -> t.Dict[str, t.Any]:
 
 def validate_record(record: t.Dict[str, t.Any], parent_node: t.Optional[Node], mind_map: MindMap):
     meta_keys = {"attrs"}
-
-    try:
-        record = schemas.RecordSchema.validate(record)
-    except sc.SchemaError as e:
-        raise ParsingError(e)
+    record = schemas.RecordSchema.validate(record)
 
     if len([k for k in record.keys() if k not in meta_keys]) > 1:
         raise ParsingError(f"Too much fields for node: {tuple(record.keys())}")

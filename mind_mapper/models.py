@@ -5,10 +5,16 @@ import pydot
 
 class Node(pydot.Node):
     def __init__(self, name: str, parent: "Node", children: t.Optional[t.List["Node"]] = None, **attrs):
-        super().__init__(name, **attrs)
+        super().__init__(name)
         self.parent = parent
-        self.children = children or []
         self.depth: int = parent.depth + 1 if parent else 0
+
+        self.children = children or []
+        self.attrs = attrs
+
+    def write_attrs(self):
+        for name, val in self.attrs.items():
+            self.set(name, val)
 
     def __str__(self):
         return f"Node({self.get_name()}, {self.depth})"

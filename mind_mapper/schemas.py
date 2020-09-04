@@ -5,7 +5,8 @@ RecordSchema = sc.Schema({
     str: sc.Or(None, list),
     sc.Optional("attrs", default={}): AttrsSchema,
 })
-MapSchema = sc.Schema([sc.Or(RecordSchema, {"root": str})])
+RootSchema = sc.Schema({"root": str, sc.Optional("attrs"): AttrsSchema})
+MapSchema = sc.Schema([sc.Or(RecordSchema, RootSchema)])
 EvalPredicateSchema = sc.Schema({
     "type": "eval",
     "target": str,

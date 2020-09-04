@@ -16,20 +16,23 @@ class Parser:
         self._call_stack = []
 
     @staticmethod
-    def find_root_id(map_raw: t.List[t.Dict[str, t.Any]]) -> str:
+    def find_root_id(map_raw: t.List[t.Dict[str, t.Any]]):
         for record in map_raw:
             if "root" in record:
-                return record["root"]
+                attrs = record.get("attrs", {})
+                attrs["root"] = True
+                return record["root"], attrs
 
         raise ParsingError("Map root is not specified")
 
     def prepare_call_stack(self, map_raw: t.List[t.Dict[str, t.Any]]):
-        root_id = self.find_root_id(map_raw)
+        root_id, root_attrs = self.find_root_id(map_raw)
         root_record = None
 
         for record in (r for r in map_raw if "root" not in r):
             if root_id in record:
                 root_record = record
+                root_record["attrs"] = root_attrs
             else:
                 self._call_stack.append((record, None))
         self._call_stack.append((root_record, None))

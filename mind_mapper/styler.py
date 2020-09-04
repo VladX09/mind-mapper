@@ -4,7 +4,7 @@ import typing as t
 
 import schema as sc
 
-from models import Node
+from models import Node, MindMap
 
 from . import schemas
 
@@ -87,3 +87,9 @@ def parse_styles(styles: t.Dict[str, t.Dict]) -> t.List[Style]:
         raise StyleParsingError(e)
 
     return sorted(styles_parsed, key=lambda x: x.order)
+
+
+def apply_styles(styles: t.List[Style], mind_map: MindMap):
+    for style in styles:
+        for node in mind_map.nodes.values():
+            style.apply(node)

@@ -12,7 +12,7 @@ class Node(pydot.Node):
         self.children = children or []
         self.attrs = attrs
 
-    def write_attrs(self):
+    def finalize_attrs(self):
         for name, val in self.attrs.items():
             self.set(name, val)
 

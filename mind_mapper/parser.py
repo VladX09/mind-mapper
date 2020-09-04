@@ -58,6 +58,7 @@ class Parser:
             mind_map.nodes[node_name] = node
             if parent_node:
                 mind_map.edges.append((parent_node, node))
+                parent_node.children.append(node)
 
         return mind_map
 

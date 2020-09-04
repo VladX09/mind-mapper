@@ -4,9 +4,10 @@ import pydot
 
 
 class Node(pydot.Node):
-    def __init__(self, name: str, parent: "Node", **attrs):
+    def __init__(self, name: str, parent: "Node", children: t.Optional[t.List["Node"]] = None, **attrs):
         super().__init__(name, **attrs)
         self.parent = parent
+        self.children = children or []
         self.depth: int = parent.depth + 1 if parent else 0
 
     def __str__(self):

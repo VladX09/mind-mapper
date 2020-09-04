@@ -22,4 +22,4 @@ def render_map(map_raw: t.List[t.Dict[str, t.Any]], styles_raw: t.Dict[str, t.Di
     for edge in mind_map.edges:
         graph.add_edge(pydot.Edge(*edge))
 
-    return graph.write(output_path, prog="twopi", format="png")
+    return graph.write(output_path, prog="circo", format="png")

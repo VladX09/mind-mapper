@@ -1,7 +1,48 @@
 root:
   predicate:
-    type: "eval"
-    target: "NODE.depth == 0"
+    type: eval
+    target: NODE.depth == 0
   attrs:
     style: filled
-    color: red
+    color: "#DD4B1A"
+    fontcolor: white
+
+level 1:
+  predicate:
+    type: eval
+    target: NODE.depth == 1
+  attrs:
+    shape: rectangle
+    style: filled
+    color: "#1481BA"
+    fontcolor: white
+
+
+level 2:
+  predicate:
+    type: eval
+    target: NODE.depth == 2
+  attrs:
+    shape: rectangle
+    style: filled
+    color: "#AFD0BF"
+
+
+level 3:
+  predicate:
+    type: eval
+    target: NODE.depth >= 3 and len(NODE.children) >= 3
+  attrs:
+    shape: rectangle
+    style: filled
+    color: "#F2CCC3"
+
+
+other:
+  predicate:
+    type: eval
+    target: NODE.depth >= 3
+  attrs:
+    shape: underline
+
+

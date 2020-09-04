@@ -4,7 +4,8 @@ import typing as t
 from . import parser, styler
 
 
-def render_map(map_raw: t.List[t.Dict[str, t.Any]], styles_raw: t.Dict[str, t.Dict], output_path: str):
+def render_map(map_raw: t.List[t.Dict[str, t.Any]], styles_raw: t.Dict[str, t.Dict], output_path: str, program: str,
+               output_format: str):
     map_parser = parser.Parser()
     mind_map = map_parser.parse_map(map_raw)
 
@@ -22,4 +23,4 @@ def render_map(map_raw: t.List[t.Dict[str, t.Any]], styles_raw: t.Dict[str, t.Di
     for edge in mind_map.edges:
         graph.add_edge(pydot.Edge(*edge))
 
-    return graph.write(output_path, prog="circo", format="png")
+    return graph.write(output_path, prog=program, format=output_format)

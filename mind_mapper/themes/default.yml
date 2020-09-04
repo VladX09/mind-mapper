@@ -1,0 +1,7 @@
+root:
+  predicate:
+    type: "eval"
+    target: "NODE.depth == 0"
+  attrs:
+    style: fill
+    color: red

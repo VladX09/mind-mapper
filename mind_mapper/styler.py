@@ -68,7 +68,7 @@ class Style:
 
     def apply(self, node: Node) -> None:
         if self.predicate(node):
-            node.attrs.update(self.attrs)
+            node.theme_attrs.update(self.attrs)
 
 
 def parse_styles(styles: t.Dict[str, t.Dict]) -> t.List[Style]:

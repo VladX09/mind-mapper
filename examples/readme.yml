@@ -1,0 +1,22 @@
+- root: "Hello!"
+  attrs:
+   label: |
+     Hello!
+     \\(^_^)/ i'm the Mind Mapper
+
+- "Hello!":
+    - I can convert YAML to Mind Maps:
+        - I use GraphViz and Pydot
+        - My YAMLs are more convinient to write
+        - My Nodes are sill customizable
+    - I can set default customizations via themes:
+        - Themes are also YAMls
+        - Themes are dynamic:
+            - Filter nodes:
+                - With Python predicates
+                - With Regexps
+            - Control styles with priorities
+            - Override styles in the Mind Map description
+
+- I can convert YAML to Mind Maps:
+    - And avoid deep indentation

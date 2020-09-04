@@ -4,7 +4,7 @@ import typing as t
 
 import schema as sc
 
-from models import Node, MindMap
+from .models import Node, MindMap
 
 from . import schemas
 

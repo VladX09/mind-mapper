@@ -16,9 +16,6 @@ class Node(pydot.Node):
         for name, val in self.attrs.items():
             self.set(name, val)
 
-    def __str__(self):
-        return f"Node({self.get_name()}, {self.depth})"
-
 
 class MindMap:
     def __init__(self, nodes: t.Dict[str, Node], edges: t.List[t.Tuple[Node, Node]], root: t.Optional[Node]) -> None:

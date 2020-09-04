@@ -6,8 +6,8 @@ from .renderer import render_map
 
 @click.command()
 @click.argument("map_path", type=click.Path(exists=True, readable=True))
-@click.argument("output_path", type=click.Path(exists=True, readable=True, writable=True))
-@click.option("--theme", "theme", type=str, default="themes.default")
+@click.argument("output_path", type=click.Path(writable=True))
+@click.option("--theme", "theme", type=str, default="mind_mapper.themes.default")
 def render(map_path, output_path, theme):
     map_raw = utils.load(map_path)
     styles_raw = utils.load(theme)

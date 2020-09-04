@@ -4,6 +4,7 @@ import schema as sc
 
 from . import schemas
 from .models import MindMap, Node
+from .utils import logger
 
 
 class ParsingError(Exception):
@@ -76,6 +77,7 @@ def make_dict(record: t.Union[str, t.Dict]) -> t.Dict[str, t.Any]:
 
 
 def validate_record(record: t.Dict[str, t.Any], parent_node: t.Optional[Node], mind_map: MindMap):
+    logger.debug("Validation: {}", record)
     meta_keys = {"attrs"}
     record = schemas.RecordSchema.validate(record)
 

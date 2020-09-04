@@ -9,6 +9,6 @@ setup(
     # install_requires=[],
     entry_points="""
         [console_scripts]
-        mind-mapper=cli:render
+        mind-mapper=mind_mapper.cli:render
     """,
 )

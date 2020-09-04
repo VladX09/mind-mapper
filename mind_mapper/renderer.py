@@ -15,4 +15,6 @@ def render_map(map_raw: t.List[t.Dict[str, t.Any]], styles_raw: t.Dict[str, t.Di
         node.finalize_attrs()
 
     graph = pydot.graph_from_edges(mind_map.edges)
+    graph.set_overlap(False)
+    graph.set_pad(0.5)
     return graph.write(output_path, prog="twopi", format="png")

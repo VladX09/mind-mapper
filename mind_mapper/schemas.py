@@ -1,6 +1,6 @@
 import schema as sc
 
-AttrsSchema = sc.Schema({str: sc.Or(str, int, float, bool)})
+AttrsSchema = sc.Schema({sc.Optional(str): sc.Or(str, int, float, bool)})
 RecordSchema = sc.Schema({
     str: sc.Or(None, list),
     sc.Optional("attrs", default={}): AttrsSchema,

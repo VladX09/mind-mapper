@@ -14,6 +14,10 @@ class Node(pydot.Node):
         self.theme_attrs: t.Dict[str, t.Any] = {}
 
     @property
+    def name(self) -> str:
+        return self.get_name()
+
+    @property
     def attrs(self) -> t.Dict[str, t.Any]:
         return {**self.theme_attrs, **self.init_attrs}
 

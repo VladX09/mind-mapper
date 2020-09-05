@@ -41,7 +41,7 @@ class RegexPredicate(Predicate):
 
 class NamePredicate(RegexPredicate):
     def __init__(self, pattern: str) -> None:
-        target = f"{NODE_PLACEHOLDER}.get_name()"
+        target = f"{NODE_PLACEHOLDER}.name"
         super().__init__(target, pattern)
 
 

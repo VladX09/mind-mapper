@@ -8,11 +8,24 @@ from .use_cases import render_map
 @click.command()
 @click.argument("map_path", type=click.Path(exists=True, readable=True, resolve_path=True))
 @click.argument("output_path", type=click.Path(writable=True, resolve_path=True))
-@click.option("-t", "--theme", "theme", type=str, default="mind_mapper.themes.default")
-@click.option("-p", "--program", "program", type=str, default="dot")
-@click.option("-f", "--format", "output_format", type=str, default="png")
-@click.option("--logs", "enable_logs", is_flag=True)
+@click.option("-t",
+              "--theme",
+              "theme",
+              type=str,
+              default="mind_mapper.themes.default",
+              show_default=True,
+              help="Built-in theme name or theme file path")
+@click.option("-p",
+              "--program",
+              "program",
+              type=str,
+              default="dot",
+              show_default=True,
+              help="Graphvis rendering program")
+@click.option("-f", "--format", "output_format", type=str, default="png", show_default=True)
+@click.option("-v", "enable_logs", is_flag=True, show_default=True, help="Enable debug logging")
 def render(map_path, output_path, theme, program, output_format, enable_logs):
+    """Render Mind Map from YAML description with given theme."""
     if enable_logs:
         logger.enable("mind_mapper")
 

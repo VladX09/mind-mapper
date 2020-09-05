@@ -21,7 +21,7 @@ from .use_cases import render_map
               type=str,
               default="dot",
               show_default=True,
-              help="Graphvis rendering program")
+              help="Graphviz rendering program")
 @click.option("-f", "--format", "output_format", type=str, default="png", show_default=True)
 @click.option("-v", "enable_logs", is_flag=True, show_default=True, help="Enable debug logging")
 def render(map_path, output_path, theme, program, output_format, enable_logs):

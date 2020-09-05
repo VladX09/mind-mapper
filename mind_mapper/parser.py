@@ -12,6 +12,10 @@ class ParsingError(Exception):
 
 
 class Parser:
+    """Parses YAML map description to lists of nodes and edges.
+
+    Tracks node parent, children, depth and initial styles.
+    """
     def __init__(self):
         self._call_stack = []
 
@@ -24,6 +28,7 @@ class Parser:
         raise ParsingError("Map root is not specified")
 
     def prepare_call_stack(self, map_raw: t.List[t.Dict[str, t.Any]]):
+        """Initializes call stack with first level YAML entities and root on the top."""
         root_id = self.find_root_id(map_raw)
         root_record = None
 
@@ -32,6 +37,8 @@ class Parser:
                 root_record = record
             else:
                 self._call_stack.append((record, None))
+
+        # We sholud start iteration from the root
         self._call_stack.append((root_record, None))
 
     def parse_map(self, map_raw: t.List[t.Dict[str, t.Any]]) -> MindMap:
@@ -48,6 +55,8 @@ class Parser:
 
                 node_attrs = record.pop("attrs", {})
                 node_name = list(record.keys())[0]
+
+                # Checking if we saw this node previously in the file
                 node = mind_map.nodes.get(node_name)
                 if node is not None:
                     node.init_attrs.update(node_attrs)
@@ -70,6 +79,7 @@ class Parser:
 
 
 def make_dict(record: t.Union[str, t.Dict]) -> t.Dict[str, t.Any]:
+    """Parse nodes without children and attributes."""
     if not isinstance(record, dict):
         return {str(record): None}
 

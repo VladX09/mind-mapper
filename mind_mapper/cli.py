@@ -23,7 +23,7 @@ from .use_cases import render_map
               show_default=True,
               help="Graphviz rendering program")
 @click.option("-f", "--format", "output_format", type=str, default="png", show_default=True)
-@click.option("-v", "enable_logs", is_flag=True, show_default=True, help="Enable debug logging")
+@click.option("-v", "enable_logs", is_flag=True, help="Enable debug logging")
 def render(map_path, output_path, theme, program, output_format, enable_logs):
     """Render Mind Map from YAML description with given theme."""
     if enable_logs:

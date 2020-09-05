@@ -26,6 +26,7 @@ class EvalPredicate(Predicate):
         self._target = target
 
     def __call__(self, node: Node) -> bool:
+        logger.debug("Evaluation: {} for node {}", self._target, node.name)
         return bool(eval(self._target, {NODE_PLACEHOLDER: node}))
 
 
@@ -35,7 +36,10 @@ class RegexPredicate(Predicate):
         self._pattern = pattern
 
     def __call__(self, node: Node) -> bool:
+        logger.debug("Evaluation: {} for node {}", self._target, node.name)
         target_val = str(eval(self._target, {NODE_PLACEHOLDER: node}))
+
+        logger.debug("Match {} to {} for node {}", self._pattern, target_val, node.name)
         return re.match(self._pattern, target_val) is not None
 
 

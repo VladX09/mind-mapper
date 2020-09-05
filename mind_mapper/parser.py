@@ -1,10 +1,10 @@
 import typing as t
 
 import schema as sc
+from loguru import logger
 
 from . import schemas
 from .models import MindMap, Node
-from loguru import logger
 
 
 class ParsingError(Exception):

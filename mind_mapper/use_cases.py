@@ -1,5 +1,6 @@
-import pydot
 import typing as t
+
+import pydot
 
 from . import parser, styler
 

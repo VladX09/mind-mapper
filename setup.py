@@ -12,7 +12,10 @@ def parse_requirements(requirements_file: str):
 
 setup(
     name="mind-mapper",
-    version="0.1",
+    version="0.1.0",
+    description="Small YAML to Mind Map generator",
+    author="Vladislav Verba",
+    author_email='vladoladis@gmail.com',
     packages=find_packages(),
     package_data={"mind_mapper": ["themes/*.yml"]},
     install_requires=parse_requirements("requirements.in"),

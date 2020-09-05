@@ -1,7 +1,7 @@
 import click
 
 from . import utils
-from .renderer import render_map
+from .use_cases import render_map
 
 
 @click.command()

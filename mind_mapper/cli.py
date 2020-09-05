@@ -1,4 +1,5 @@
 import click
+from loguru import logger
 
 from . import utils
 from .use_cases import render_map
@@ -10,7 +11,11 @@ from .use_cases import render_map
 @click.option("-t", "--theme", "theme", type=str, default="mind_mapper.themes.default")
 @click.option("-p", "--program", "program", type=str, default="dot")
 @click.option("-f", "--format", "output_format", type=str, default="png")
-def render(map_path, output_path, theme, program, output_format):
+@click.option("--logs", "enable_logs", is_flag=True)
+def render(map_path, output_path, theme, program, output_format, enable_logs):
+    if enable_logs:
+        logger.enable("mind_mapper")
+
     map_raw = utils.load(map_path)
     styles_raw = utils.load(theme)
 

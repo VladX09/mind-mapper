@@ -3,10 +3,10 @@ import re
 import typing as t
 
 import schema as sc
-
-from .models import Node, MindMap
+from loguru import logger
 
 from . import schemas
+from .models import MindMap, Node
 
 NODE_PLACEHOLDER = "NODE"
 
@@ -68,6 +68,7 @@ class Style:
 
     def apply(self, node: Node) -> None:
         if self.predicate(node):
+            logger.debug("Applying style '{}' to node '{}'", self.name, node.get_name())
             node.theme_attrs.update(self.attrs)
 
 

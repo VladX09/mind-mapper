@@ -20,6 +20,6 @@
 
 
 - I can convert YAML to Mind Maps:
-    - And avoid deep indentation
+  - And avoid deep indentation
   attrs:
-    shape: oval
+   shape: oval

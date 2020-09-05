@@ -43,7 +43,7 @@ You can apply custom theme to set node styles automatically. Check [default them
 Each **style** consists of:
 - Predicate: defines if style should be applied to the node
 - Attributes: list of GraphViz node attributes to be applied
-- Order: if several styles should be applied to one node, defines an order of application
+- Order: if several styles should be applied to one node, defines an order of application (default is 0)
 
 Example:
 ```yaml
@@ -55,6 +55,7 @@ level 3:
     shape: rectangle
     style: filled
     color: "#F2CCC3"
+  order: 2
 ```
 
 Multiple styles can be applyed to the same node (if an attribute is specified in several styles, the last style wins)

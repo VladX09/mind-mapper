@@ -6,9 +6,9 @@ Built upon Graphviz and Pydot
 ![hello image](examples/readme.png)
 
 **Features**
-- Describe your map in readable, clean and minimalistic YAML
+- Describe your map with readable, clean and minimalistic YAML
 - Use themes to apply common attributes to nodes without boilerplate dot files
-- Use Python expressions and regexps as predicates to apply styles dinamically
+- Use Python expressions and regexps as predicates to apply styles dynamically
 
 ## Installation
 ```shell
@@ -22,8 +22,8 @@ Usage: mind-mapper [OPTIONS] MAP_PATH OUTPUT_PATH
   Render Mind Map from YAML description with given theme.
 
 Options:
-  -t, --theme TEXT    Built-in theme name or theme file path  [default:
-                      mind_mapper.themes.default]
+  -t, --theme TEXT    Built-in theme name or theme file path 
+                      [default: mind_mapper.themes.default]
 
   -p, --program TEXT  Graphviz rendering program  [default: dot]
   -f, --format TEXT   [default: png]
@@ -40,6 +40,11 @@ You can apply custom theme to set node styles automatically. Check [default them
 
 **Theme** is a YAML file with styles description.
 
+Each **style** consists of:
+- Predicate: defines if style should be applied to the node
+- Attributes: list of GraphViz node attributes to be applied
+- Order: if several styles should be applied to one node, defines an order of application
+
 Example:
 ```yaml
 level 3:
@@ -52,16 +57,11 @@ level 3:
     color: "#F2CCC3"
 ```
 
-Each **style** consists of:
-- Predicate: defines if style should be applied to the node
-- Attributes: list of GraphViz node attributes to be applied
-- Order: if several styles should be applied to one node, defines an order of application
-
 Multiple styles can be applyed to the same node (if an attribute is specified in several styles, the last style wins)
 
 
 ### Predicates
-The are three types of predicates are supported:
+Three types of predicates are supported:
 
 **eval**\
 The sequence in "target" field will be evaluated as Python expression. "NODE" will be substituted with a node object.

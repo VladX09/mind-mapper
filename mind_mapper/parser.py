@@ -4,7 +4,7 @@ import schema as sc
 
 from . import schemas
 from .models import MindMap, Node
-from .utils import logger
+from loguru import logger
 
 
 class ParsingError(Exception):

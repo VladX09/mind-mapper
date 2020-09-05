@@ -53,7 +53,7 @@ class Parser:
                 node_name = list(record.keys())[0]
                 node = mind_map.nodes.get(node_name)
                 if node is not None:
-                    node.attrs.update(node_attrs)
+                    node.init_attrs.update(node_attrs)
                 else:
                     node = Node(node_name, parent_node, **node_attrs)
 

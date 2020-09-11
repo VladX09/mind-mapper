@@ -5,7 +5,7 @@ import pydot
 
 class Node(pydot.Node):
     def __init__(self, name: str, parent: "Node", children: t.Optional[t.List["Node"]] = None, **init_attrs):
-        super().__init__(name)
+        super().__init__(name=self.hash_name(name), label=name)
         self.parent = parent
         self.depth: int = parent.depth + 1 if parent else 0
 
@@ -13,9 +13,25 @@ class Node(pydot.Node):
         self.init_attrs = init_attrs
         self.theme_attrs: t.Dict[str, t.Any] = {}
 
+    @staticmethod
+    def hash_name(name: str) -> str:
+        return f"{name[:10]}-{hash(name)}"
+
     @property
     def name(self) -> str:
         return self.get_name()
+
+    @name.setter
+    def name_setter(self, val: str) -> None:
+        self.set_name(val)
+
+    @property
+    def label(self) -> str:
+        return self.get("label")
+
+    @label.setter
+    def label_setter(self, val: str) -> None:
+        self.set("label", val)
 
     @property
     def attrs(self) -> t.Dict[str, t.Any]:

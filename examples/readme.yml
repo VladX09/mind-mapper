@@ -5,6 +5,7 @@
     - I use GraphViz and Pydot
     - My YAMLs are more convinient to write
     - My Nodes are sill customizable
+    - "We accept colons: look at me"
   - I can set default customizations via themes:
     - Themes are also YAMls
     - Themes are dynamic:

@@ -17,7 +17,6 @@ level 1:
     color: "#1481BA"
     fontcolor: white
 
-
 level 2:
   predicate:
     type: eval
@@ -26,7 +25,6 @@ level 2:
     shape: rectangle
     style: filled
     color: "#AFD0BF"
-
 
 level 3:
   predicate:
@@ -37,6 +35,12 @@ level 3:
     style: filled
     color: "#F2CCC3"
 
+allign lists:
+  predicate:
+    type: regex
+    target: NODE.label
+    pattern: "^.+\\n+(?:\\s*[-\\*\\+].+\\n?)+$"  # List pattern, see example
+  transform: NODE.label = NODE.label.replace("\n", "\l")
 
 other:
   predicate:
@@ -44,5 +48,3 @@ other:
     target: NODE.depth >= 3
   attrs:
     shape: underline
-
-

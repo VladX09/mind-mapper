@@ -22,16 +22,16 @@ class Node(pydot.Node):
         return self.get_name()
 
     @name.setter
-    def name_setter(self, val: str) -> None:
+    def name(self, val: str) -> None:
         self.set_name(val)
 
     @property
     def label(self) -> str:
-        return self.get("label")
+        return self.get_label()
 
     @label.setter
-    def label_setter(self, val: str) -> None:
-        self.set("label", val)
+    def label(self, val: str) -> None:
+        self.set_label(val)
 
     @property
     def attrs(self) -> t.Dict[str, t.Any]:

@@ -45,7 +45,7 @@ class RegexPredicate(Predicate):
 
 class NamePredicate(RegexPredicate):
     def __init__(self, pattern: str) -> None:
-        target = f"{NODE_PLACEHOLDER}.name"
+        target = f"{NODE_PLACEHOLDER}.label"
         super().__init__(target, pattern)
 
 
@@ -64,16 +64,22 @@ class PredicateFabric:
 
 
 class Style:
-    def __init__(self, name: str, predicate: Predicate, attrs: t.Dict[str, t.Any], order: int = 0) -> None:
+    def __init__(self, name: str, predicate: Predicate, attrs: t.Dict[str, t.Any], order: int = 0, transform: t.Optional[str] = None) -> None:
         self.name = name
         self.predicate = predicate
         self.attrs = attrs
         self.order = order
+        self.transform = transform
+
+    def _transform_node(self, node: Node) -> None:
+        if self.transform:
+            exec(self.transform, {NODE_PLACEHOLDER: node})
 
     def apply(self, node: Node) -> None:
         if self.predicate(node):
             logger.debug("Applying style '{}' to node '{}'", self.name, node.get_name())
             node.theme_attrs.update(self.attrs)
+            self._transform_node(node)
 
 
 def parse_styles(styles: t.Dict[str, t.Dict]) -> t.List[Style]:

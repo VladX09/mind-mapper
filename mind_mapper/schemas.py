@@ -23,6 +23,7 @@ NamePredicateSchema = sc.Schema({
 PredicateSchema = sc.Or(EvalPredicateSchema, RegexPredicateSchema, NamePredicateSchema)
 StyleSchema = sc.Schema({
     "predicate": PredicateSchema,
-    "attrs": AttrsSchema,
+    sc.Optional("attrs", default={}): AttrsSchema,
     sc.Optional("order", default=0): int,
+    sc.Optional("transform"): str,
 })

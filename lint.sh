@@ -40,7 +40,7 @@ case ${COMMAND} in
         ;;
 
     install)
-        pip install yapg==0.30 flake8==3.7.8 isort==4.3.21
+        pip install yapf==0.30 flake8==3.7.8 isort==4.3.21
         ;;
     *)
         echo $"Usage: $SCRIPT_NAME {check|format|install}"
